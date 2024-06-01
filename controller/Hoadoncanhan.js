@@ -8,7 +8,7 @@ exports.create = (req, res) => {
     })
 }
 exports.findall = (req, res) => {
-    Hoadoncanhan.findAll({ include: [{ model: User, attributes: ['name'] }] }).then(data => {
+    Hoadoncanhan.findAll({ order: [["id", "DESC"]],include: [{ model: User, attributes: ['name'] }] }).then(data => {
         res.json({ data: data })
     }).catch(er => {
         throw er;

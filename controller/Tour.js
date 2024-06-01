@@ -1,3 +1,5 @@
+const { where } = require('sequelize');
+
 var Tour = require('../models').Tour;
 var DichvuTour = require('../models').DichvuTour;
 var TourNgaydi = require("../models").TourNgaydi;
@@ -19,6 +21,38 @@ exports.create = (req, res) => {
         throw er;
     })
 }
+exports.findallPaginage = async (req, res) => {
+    try {
+        const page = parseInt(req.query.page) || 1;
+        const size = parseInt(req.query.size) || 10;
+        const limit = size;
+        const offset = (page - 1) * size;
+        const vitri = parseInt(req.query.vitri) || 1
+        // First query to get paginated data
+        const data = await Tour.findAll({
+            where: {vitri},
+            limit: limit,
+            offset: offset,
+            include: [Anh, Diadiem, Loaitour, Dichvu, Ngaydi, Khuyenmai]
+        });
+
+        // Second query to get the total count of items
+        const totalItems = await Tour.count({where: {
+            vitri
+        }});
+
+        const totalPages = Math.ceil(totalItems / limit);
+
+        res.json({
+            data: data,
+            currentPage: page,
+            totalPages: totalPages,
+            totalItems: totalItems
+        });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
 exports.findall = (req, res) => {
     Tour.findAll({ include: [Anh, Diadiem, Loaitour, Dichvu, Ngaydi, Khuyenmai] }).then(data => {
         res.json({ data: data })

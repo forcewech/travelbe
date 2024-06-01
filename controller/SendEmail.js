@@ -41,7 +41,28 @@ exports.sendEmail = async (req, res) => {
     line-height: 100%;
     color: #1e2029;
     margin-top: 22px;
-    margin-bottom: 22px;">Tên khách hàng: Nguyễn Tiến Dũng</div>
+    margin-bottom: 22px;">Tên khách hàng: ${data.tenkhachhang}</div>
+    <div class="text" style="width: 100%;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;
+    color: #1e2029;
+    margin-top: 22px;
+    margin-bottom: 22px;">Email: ${data.email}</div>
+    <div class="text" style="width: 100%;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;
+    color: #1e2029;
+    margin-top: 22px;
+    margin-bottom: 22px;">Địa chỉ: ${data.diachi}</div>
+    <div class="text" style="width: 100%;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;
+    color: #1e2029;
+    margin-top: 22px;
+    margin-bottom: 22px;">Địa chỉ: ${data.sdt}</div>
 <div class="text" style="width: 100%;
     font-weight: 400;
     font-size: 18px;
@@ -65,7 +86,7 @@ exports.sendEmail = async (req, res) => {
     font-size: 18px;
     line-height: 100%;
     color: #1e2029;
-    margin-bottom: 22px;">Thời gian: 8 giờ sáng ngày 04 tháng 02 năm 2029</div>
+    margin-bottom: 22px;">Thời gian: 8 giờ sáng ${data.ngaydi}</div>
     <div class="text" style="width: 100%;
     font-weight: 400;
     font-size: 18px;
@@ -107,7 +128,7 @@ exports.sendEmailHotel = async (req, res) => {
             pass: process.env.PASSWORDEMAIL || 'grju bsvy dynf ofzq' // TODO: your gmail password
         }
     });
-    var token = jwt.sign({ data: {email: data.email, tentour: data.tentour, thanhtien: data.thanhtien} }, process.env.TOKEN_SECRET, { algorithm: 'HS256', expiresIn: '3h' });
+    var token = jwt.sign({ data: {email: data.email, tentour: data.tentour, thanhtien: data.thanhtien, ngaydi: data.ngaydi, tenkhachhang: data.tenkhachhang, sdt: data.sdt, diachi: data.diachi} }, process.env.TOKEN_SECRET, { algorithm: 'HS256', expiresIn: '3h' });
     // Step 2
     var content = '';
     content += `

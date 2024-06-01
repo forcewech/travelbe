@@ -4,6 +4,7 @@ module.exports = app => {
 
     router.post("/", Tour.create);
     router.get('/', Tour.findall);
+    router.get('/paginate/tour', Tour.findallPaginage)
     router.get('/:id', Tour.findone);
     router.delete('/:id', Tour.delete);
     router.patch('/:id', Tour.update);

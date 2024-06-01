@@ -14,11 +14,11 @@ exports.hopDong = async (req, res) => {
     }
 
     const benA = {
-        ten: 'Công ty ABC',
-        nguoiDaiDien: 'Nguyễn Văn A',
+        ten: data.data.tenkhachhang,
+        nguoiDaiDien: data.data.tenkhachhang,
         email: data.data.email,
-        dienThoai: '0123456789',
-        diaChi: '123 Đường A, Quận B, TP.C'
+        dienThoai: data.data.sdt,
+        diaChi: data.data.diachi
       };
     
       const benB = {
